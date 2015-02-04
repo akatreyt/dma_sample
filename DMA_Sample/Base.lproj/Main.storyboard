@@ -80,7 +80,7 @@
                                     <constraint firstAttribute="height" constant="163" id="wd7-b4-dTl"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFy-H1-BxB">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFy-H1-BxB">
                                 <rect key="frame" x="16" y="199" width="568" height="381"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -155,8 +155,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="krY-LJ-HuQ"/>
                                 </constraints>
-                                <color key="pageIndicatorTintColor" cocoaTouchSystemColor="lightTextColor"/>
-                                <color key="currentPageIndicatorTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="pageIndicatorTintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
