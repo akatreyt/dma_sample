@@ -10,10 +10,8 @@
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController
-
-@property (strong, nonatomic) DetailViewController *detailViewController;
-
-
+@interface MasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) DetailViewController *detailViewController;
+-(IBAction)tapToReload:(id)sender;
 @end
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63F662451A819046003A50A8 /* HomeRowObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F662441A819046003A50A8 /* HomeRowObject.m */; };
+		D350E6ED1A81AB5F0001358C /* DetailPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D350E6EC1A81AB5F0001358C /* DetailPhotoViewController.m */; };
 		D36C151F1A8047C8007912F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C151E1A8047C8007912F7 /* main.m */; };
 		D36C15221A8047C8007912F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C15211A8047C8007912F7 /* AppDelegate.m */; };
 		D36C15251A8047C8007912F7 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C15241A8047C8007912F7 /* MasterViewController.m */; };
@@ -15,6 +17,11 @@
 		D36C152D1A8047C8007912F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D36C152C1A8047C8007912F7 /* Images.xcassets */; };
 		D36C15301A8047C8007912F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36C152E1A8047C8007912F7 /* LaunchScreen.xib */; };
 		D36C153C1A8047C8007912F7 /* DMA_SampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C153B1A8047C8007912F7 /* DMA_SampleTests.m */; };
+		D36C15511A8047E5007912F7 /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C154A1A8047E5007912F7 /* NetworkController.m */; };
+		D36C15521A8047E5007912F7 /* DetailObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C154D1A8047E5007912F7 /* DetailObject.m */; };
+		D36C15531A8047E5007912F7 /* HomeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C154F1A8047E5007912F7 /* HomeObject.m */; };
+		D36C15561A804A34007912F7 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C15551A804A34007912F7 /* NSString+Hash.m */; };
+		D36C15591A804F64007912F7 /* HomeCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C15581A804F64007912F7 /* HomeCustomTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63F662431A819046003A50A8 /* HomeRowObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRowObject.h; sourceTree = "<group>"; };
+		63F662441A819046003A50A8 /* HomeRowObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeRowObject.m; sourceTree = "<group>"; };
+		D350E6EB1A81AB5F0001358C /* DetailPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPhotoViewController.h; sourceTree = "<group>"; };
+		D350E6EC1A81AB5F0001358C /* DetailPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPhotoViewController.m; sourceTree = "<group>"; };
 		D36C15191A8047C8007912F7 /* DMA_Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMA_Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36C151D1A8047C8007912F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D36C151E1A8047C8007912F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,6 +54,17 @@
 		D36C15351A8047C8007912F7 /* DMA_SampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DMA_SampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36C153A1A8047C8007912F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D36C153B1A8047C8007912F7 /* DMA_SampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMA_SampleTests.m; sourceTree = "<group>"; };
+		D36C15461A8047E5007912F7 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		D36C15491A8047E5007912F7 /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
+		D36C154A1A8047E5007912F7 /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkController.m; sourceTree = "<group>"; };
+		D36C154C1A8047E5007912F7 /* DetailObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailObject.h; sourceTree = "<group>"; };
+		D36C154D1A8047E5007912F7 /* DetailObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailObject.m; sourceTree = "<group>"; };
+		D36C154E1A8047E5007912F7 /* HomeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeObject.h; sourceTree = "<group>"; };
+		D36C154F1A8047E5007912F7 /* HomeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeObject.m; sourceTree = "<group>"; };
+		D36C15541A804A34007912F7 /* NSString+Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hash.h"; sourceTree = "<group>"; };
+		D36C15551A804A34007912F7 /* NSString+Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hash.m"; sourceTree = "<group>"; };
+		D36C15571A804F64007912F7 /* HomeCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeCustomTableViewCell.h; path = "Home Custom Cell/HomeCustomTableViewCell.h"; sourceTree = "<group>"; };
+		D36C15581A804F64007912F7 /* HomeCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeCustomTableViewCell.m; path = "Home Custom Cell/HomeCustomTableViewCell.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +112,19 @@
 				D36C15241A8047C8007912F7 /* MasterViewController.m */,
 				D36C15261A8047C8007912F7 /* DetailViewController.h */,
 				D36C15271A8047C8007912F7 /* DetailViewController.m */,
+				D350E6EB1A81AB5F0001358C /* DetailPhotoViewController.h */,
+				D350E6EC1A81AB5F0001358C /* DetailPhotoViewController.m */,
 				D36C15291A8047C8007912F7 /* Main.storyboard */,
+				D36C15451A8047E5007912F7 /* Common */,
+				D36C15481A8047E5007912F7 /* Network Controller */,
+				D36C154B1A8047E5007912F7 /* objects */,
 				D36C152C1A8047C8007912F7 /* Images.xcassets */,
 				D36C152E1A8047C8007912F7 /* LaunchScreen.xib */,
 				D36C151C1A8047C8007912F7 /* Supporting Files */,
+				D36C15541A804A34007912F7 /* NSString+Hash.h */,
+				D36C15551A804A34007912F7 /* NSString+Hash.m */,
+				D36C15571A804F64007912F7 /* HomeCustomTableViewCell.h */,
+				D36C15581A804F64007912F7 /* HomeCustomTableViewCell.m */,
 			);
 			path = DMA_Sample;
 			sourceTree = "<group>";
@@ -122,6 +153,36 @@
 				D36C153A1A8047C8007912F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D36C15451A8047E5007912F7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D36C15461A8047E5007912F7 /* Common.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D36C15481A8047E5007912F7 /* Network Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D36C15491A8047E5007912F7 /* NetworkController.h */,
+				D36C154A1A8047E5007912F7 /* NetworkController.m */,
+			);
+			path = "Network Controller";
+			sourceTree = "<group>";
+		};
+		D36C154B1A8047E5007912F7 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				D36C154C1A8047E5007912F7 /* DetailObject.h */,
+				D36C154D1A8047E5007912F7 /* DetailObject.m */,
+				D36C154E1A8047E5007912F7 /* HomeObject.h */,
+				D36C154F1A8047E5007912F7 /* HomeObject.m */,
+				63F662431A819046003A50A8 /* HomeRowObject.h */,
+				63F662441A819046003A50A8 /* HomeRowObject.m */,
+			);
+			path = objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,8 +287,15 @@
 			files = (
 				D36C15221A8047C8007912F7 /* AppDelegate.m in Sources */,
 				D36C15251A8047C8007912F7 /* MasterViewController.m in Sources */,
+				D350E6ED1A81AB5F0001358C /* DetailPhotoViewController.m in Sources */,
 				D36C151F1A8047C8007912F7 /* main.m in Sources */,
+				D36C15561A804A34007912F7 /* NSString+Hash.m in Sources */,
+				D36C15591A804F64007912F7 /* HomeCustomTableViewCell.m in Sources */,
+				D36C15511A8047E5007912F7 /* NetworkController.m in Sources */,
+				63F662451A819046003A50A8 /* HomeRowObject.m in Sources */,
+				D36C15521A8047E5007912F7 /* DetailObject.m in Sources */,
 				D36C15281A8047C8007912F7 /* DetailViewController.m in Sources */,
+				D36C15531A8047E5007912F7 /* HomeObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +422,7 @@
 				INFOPLIST_FILE = DMA_Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -364,6 +433,7 @@
 				INFOPLIST_FILE = DMA_Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -420,6 +490,7 @@
 				D36C15411A8047C8007912F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D36C15421A8047C8007912F7 /* Build configuration list for PBXNativeTarget "DMA_SampleTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +499,7 @@
 				D36C15441A8047C8007912F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

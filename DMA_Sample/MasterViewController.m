@@ -8,30 +8,41 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "NetworkController.h"
+#import "Common.h"
+#import "HomeObject.h"
+#import "HomeCustomTableViewCell.h"
+#import "HomeRowObject.h"
 
 @interface MasterViewController ()
+@property (nonatomic, retain) NetworkController *networkController;
+@property (nonatomic, retain) HomeObject *homeObject;
+@property (nonatomic, retain) UIRefreshControl *refreshControl;
 
-@property NSMutableArray *objects;
+@property (nonatomic, weak) IBOutlet UIView *errorView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @end
 
 @implementation MasterViewController
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.clearsSelectionOnViewWillAppear = NO;
-        self.preferredContentSize = CGSizeMake(320.0, 600.0);
-    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+
+    
+    _refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(tapToReload:) forControlEvents:UIControlEventValueChanged];
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.tableView;
+    tableViewController.refreshControl = self.refreshControl;
+
+    
+    [self getHomeData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,13 +50,111 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
+
+/*
+    fetch all the home data
+ */
+-(void)getHomeData
+{
+    if(!self.networkController)
+    {
+        _networkController = [[NetworkController alloc] init];
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+   
+    [self.errorView setHidden:YES];
+    
+    GetData homeDataCallback = ^(BOOL succeed, HomeObject *homeObject)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(succeed)
+            {
+                self.homeObject = homeObject;
+                self.title = self.homeObject.title;
+                [self.tableView reloadData];
+                
+                [self.tableView setHidden:NO];
+                [self.errorView setHidden:YES];
+            }
+            else
+            {
+                [self.tableView setHidden:YES];
+                [self.errorView setHidden:NO];
+            }
+            [self.refreshControl endRefreshing];
+        });
+    };
+    
+    [self.errorView setHidden:YES];
+    
+    [self.refreshControl beginRefreshing];
+    
+    if (self.tableView.contentOffset.y == 0) {
+        
+        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^(void){
+            
+            self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+            
+        } completion:^(BOOL finished){
+            
+        }];
+        
+    }
+    
+    [self.networkController getData:home_url_str :homeDataCallback];
+}
+
+
+/*
+ fetch the image for a HomeRowObject
+ */
+-(void)getImageForObject :(HomeRowObject *)object
+{
+    if(!self.networkController)
+    {
+        _networkController = [[NetworkController alloc] init];
+    }
+    
+    GetImage objectImageCallback = ^(BOOL succeed, HomeRowObject *homeObject)
+    {
+        if(succeed)
+        {
+           dispatch_async(dispatch_get_main_queue(), ^{
+               int idx = (int)[self.homeObject.rowObjects indexOfObject:homeObject];
+               [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+           });
+        }
+        else
+        {
+            
+        }
+    };
+    
+    [self.networkController getImage:object :objectImageCallback];
+}
+
+
+#pragma mark IBAction
+-(IBAction)tapToReload:(id)sender
+{
+    NSArray *iterateArray = [self.homeObject.rowObjects copy];
+    
+    for(HomeRowObject *obj in iterateArray)
+    {
+        NSIndexPath *path = [NSIndexPath indexPathForRow:[self.homeObject.rowObjects indexOfObject:obj] inSection:0];
+        [self.homeObject.rowObjects removeObject:obj];
+        [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
+    }
+
+    /*
+        
+     we delay the call 1 second to allow the animation to finish
+     
+     */
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getHomeData];
+    });
+    
+    
 }
 
 #pragma mark - Segues
@@ -53,11 +162,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
+        HomeRowObject *object = self.homeObject.rowObjects[indexPath.row];
+        DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
+        [controller setDetailObject:object];
+        [controller setNetworkController:self.networkController];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
@@ -68,29 +179,38 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    return self.homeObject.rowObjects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    HomeCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeCell" forIndexPath:indexPath];
 
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    HomeRowObject *object = self.homeObject.rowObjects[indexPath.row];
+    cell.title.text = [object title];
+    cell.desc.text = [object text];
+    
+    if(object.imageData)
+    {
+        UIImage *image = [UIImage imageWithData:object.imageData];
+        cell.cellImageView.image = image;
+    }
+    else
+    {
+        [self getImageForObject:object];
+    }
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.homeObject.rowObjects removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     }
 }
-
 @end

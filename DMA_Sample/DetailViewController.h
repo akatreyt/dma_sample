@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeObject.h"
+#import "NetworkController.h"
+#import "HomeRowObject.h"
 
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) id detailItem;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (nonatomic, strong) HomeRowObject *detailObject;
+@property (nonatomic, strong) NetworkController *networkController;
 
+
+-(IBAction)viewDetailPhotos:(id)sender;
 @end
 
